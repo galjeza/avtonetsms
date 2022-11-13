@@ -67,7 +67,7 @@ def stripTheAds(ads):
 
     for ad in ads :
         time.sleep(0.7)
-        if(sheet.find(ad)==None):
+        if(sheet.find(ad) is None):
             refactored_ads.append(ad)
 
 
