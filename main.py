@@ -223,11 +223,17 @@ def getParameters():
 
 
 
+try:
+    parameters = getParameters()
+    urls =  parameters.get("urls")
+    sporocilo = parameters.get("sporocilo")
+    procent = parameters.get("procent")
+    # setupProxy()
+    printMoney(urls,sporocilo,procent)
+except Exception as e:
+    print(e)
+    time.sleep(10)
+    print(e)
+    
 
-parameters = getParameters()
-urls =  parameters.get("urls")
-sporocilo = parameters.get("sporocilo")
-procent = parameters.get("procent")
-# setupProxy()
-printMoney(urls,sporocilo,procent)
 print("=> Proces uspešno zaključen.")
