@@ -17,10 +17,8 @@ def insertContact(contact):
     sheet2 = client.open("AvtonetSMS").get_worksheet(1)
     procent = sheet2.cell(4,1).value.strip()
     sheet = client.open("AvtonetSMS").sheet1
-
-
     cell =sheet.find(contact.phoneNumber)
-    if(cell==None):
+    if(cell is None):
         cena = int(re.sub('\D', '', contact.price))
         ponujena_cena = cena - (cena*(int(procent)/100))
         ponujena_cena = round(ponujena_cena/10)*10
