@@ -75,9 +75,8 @@ def stripTheAds(ads):
     return refactored_ads
 
 
-def getUrls(urls):
+def getUrls(urls,driver):
     ads = []
-    driver = setup_webdriver()
     for url in urls:
         print("=> Getting ads from:" + url + ".")
         driver.get(url)
@@ -99,11 +98,8 @@ def getUrls(urls):
             else:
                 print("Najden avto v top ponudbi")
 
-    driver.quit()
-
     ads = stripTheAds(ads)
     print("=> Found "+ str(len(ads))+ " new ads.")
-
     return ads
 
 def setup_webdriver():
@@ -119,8 +115,7 @@ def setup_webdriver():
     return driver
 
 
-def sendSMS(oglasi,sporocilo,procent):
-    driver = setup_webdriver()
+def sendSMS(oglasi,sporocilo,procent,driver):
     driver.get("https://www.smsapi.si/prijava")
     emailInput = driver.find_element_by_id("c_users_email")
     emailInput.click()
@@ -130,10 +125,6 @@ def sendSMS(oglasi,sporocilo,procent):
     passInput.send_keys("vital1985")
     driver.find_element_by_id("submitButton").click()
     site = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.ID, 'topNavigation')))
-
-
-
-
 
 
     for oglas in oglasi:
@@ -160,17 +151,14 @@ def sendSMS(oglasi,sporocilo,procent):
         
     return True
 
-def printMoney(url,sporocilo,procent):
+def printMoney(url,sporocilo,procent,driver):
     for i in range(99):
         try:
-
-            urls = getUrls(url)
+            urls = getUrls(url,driver)
             break
         except Exception as e:
            print(e)
 
-
-    driver = setup_webdriver()
     oglasi = []
     for adUrl in urls:
 
@@ -187,11 +175,8 @@ def printMoney(url,sporocilo,procent):
                 break
             except Exception as e:
                 print(traceback.format_exc())
-                driver.quit()
-                driver = setup_webdriver()
-    driver.quit()
     print(oglasi)
-    sendSMS(oglasi,sporocilo,procent)
+    sendSMS(oglasi,sporocilo,procent,driver)
 
 def getParameters():
     scope = ["https://spreadsheets.google.com/feeds", 'https://www.googleapis.com/auth/spreadsheets',
@@ -221,16 +206,19 @@ def getParameters():
 
 
 try:
+    driver = setup_webdriver()
     parameters = getParameters()
     urls =  parameters.get("urls")
     sporocilo = parameters.get("sporocilo")
     procent = parameters.get("procent")
     # setupProxy()
-    printMoney(urls,sporocilo,procent)
+    printMoney(urls,sporocilo,procent,driver)
+    driver.quit()
 except Exception as e:
     print(e)
     time.sleep(10)
     print(e)
+    driver.quit()
     
 
 print("=> Proces uspešno zaključen.")
