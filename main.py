@@ -79,10 +79,9 @@ def getUrls(urls):
     driver = setup_webdriver()
     for url in urls:
         print("=> Getting ads from:" + url + ".")
-
         driver.get(url)
         time.sleep(8)
-        site = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.NAME, 'Avto.net')))
+        site = WebDriverWait(driver, 100000).until(EC.presence_of_element_located((By.NAME, 'Avto.net')))
         
         soup = BeautifulSoup(driver.page_source, "html.parser")
         print("=> Recieved page source.")
@@ -167,10 +166,7 @@ def printMoney(url,sporocilo,procent):
             urls = getUrls(url)
             break
         except Exception as e:
-            exc_type, exc_obj, exc_tb = sys.exc_info()
-            fname = os.path.split(exc_tb.tb_frame.f_code.co_filename)[1]
-            print(exc_type, fname, exc_tb.tb_lineno)
-            print("=> Couldn't reach site from this IP.")
+           print(e)
 
 
     driver = setup_webdriver()
