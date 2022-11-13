@@ -17,7 +17,7 @@ def insertContact(contact):
     sheet2 = client.open("AvtonetSMS").get_worksheet(1)
     procent = sheet2.cell(4,1).value.strip()
     sheet = client.open("AvtonetSMS").sheet1
-    val = worksheet.acell('B22').value
+    val = sheet.acell('B22').value
     print("TESTING VAL")
     print(val)
     cell =sheet.find(contact.phoneNumber)
