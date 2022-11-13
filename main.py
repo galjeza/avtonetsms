@@ -18,8 +18,6 @@ def insertContact(contact):
     procent = sheet2.cell(4,1).value.strip()
     sheet = client.open("AvtonetSMS").sheet1
     val = sheet.acell('B22').value
-    print("TESTING VAL")
-    print(val)
     cell =sheet.find(contact.phoneNumber)
     if(cell is None):
         cena = int(re.sub('\D', '', contact.price))
