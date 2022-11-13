@@ -152,29 +152,18 @@ def sendSMS(oglasi,sporocilo,procent,driver):
     return True
 
 def printMoney(url,sporocilo,procent,driver):
-    for i in range(99):
-        try:
-            urls = getUrls(url,driver)
-            break
-        except Exception as e:
-           print(e)
-
+    urls = getUrls(url,driver)
     oglasi = []
     for adUrl in urls:
-
         time.sleep(2)
-        for i in range(10):
-
-            try:
-                contact = insertInfo(adUrl,driver)
-                if(contact != False):
-                    oglasi.append({
-                        "cena":contact.price,
-                        "stevilka":contact.phoneNumber
-                    })
-                break
-            except Exception as e:
-                print(traceback.format_exc())
+        contact = insertInfo(adUrl,driver)
+        if(contact != False):
+            oglasi.append({
+                "cena":contact.price,
+                "stevilka":contact.phoneNumber
+                })
+              
+            
     print(oglasi)
     sendSMS(oglasi,sporocilo,procent,driver)
 
