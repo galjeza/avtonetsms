@@ -122,6 +122,8 @@ def sendSMS(oglasi,sporocilo,procent,driver):
     passInput.send_keys("vital1985")
     driver.find_element(By.ID,"submitButton").click()
     site = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.ID, 'topNavigation')))
+    
+    print("St smsov za posiljanje:" + str(len(oglasi)))
 
 
     for oglas in oglasi:
