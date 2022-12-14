@@ -203,6 +203,7 @@ try:
     procent = parameters.get("procent")
     # setupProxy()
     printMoney(urls,sporocilo,procent,driver)
+    time.sleep(100000)
     driver.quit()
 except Exception as e:
     print(e)
