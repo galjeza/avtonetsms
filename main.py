@@ -1,4 +1,3 @@
-
 class Contact:
     def __init__(self,phoneNumber,car,price,letnik,url,place):
         self.phoneNumber = phoneNumber
@@ -143,6 +142,8 @@ def sendSMS(oglasi,sporocilo,procent,driver):
             driver.find_element_by_id("submitButton").click()
             time.sleep(5)
         print("=> Pošiljam sms na tel številko: "+oglas.get("stevilka"))
+        
+        
         
         
         
