@@ -114,13 +114,13 @@ def setup_webdriver():
 
 def sendSMS(oglasi,sporocilo,procent,driver):
     driver.get("https://www.smsapi.si/prijava")
-    emailInput = driver.find_element_by_id("c_users_email")
+    emailInput = driver.find_element(By.ID,"c_users_email")
     emailInput.click()
     emailInput.send_keys("vitalteam.dj@gmail.com")
-    passInput = driver.find_element_by_id("c_users_password")
+    passInput = driver.find_element(By.ID,"c_users_password")
     passInput.click()
     passInput.send_keys("vital1985")
-    driver.find_element_by_id("submitButton").click()
+    driver.find_element(By.ID "submitButton").click()
     site = WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.ID, 'topNavigation')))
 
 
@@ -135,11 +135,11 @@ def sendSMS(oglasi,sporocilo,procent,driver):
             print("ponujena cen:"+str(ponujena_cena))
             driver.get("https://www.smsapi.si/prejemniki/poslji-sms")
             idbtn =  WebDriverWait(driver, 15).until(EC.presence_of_element_located((By.ID, 'c_users_country_code')))
-            driver.find_element_by_id("c_users_tel_numbers").click()
-            driver.find_element_by_id("c_users_tel_numbers").send_keys(oglas.get("stevilka"))
-            driver.find_element_by_id("c_users_msg").click()
-            driver.find_element_by_id("c_users_msg").send_keys(sporocilo.replace("$CENA",ponujena_cena))
-            driver.find_element_by_id("submitButton").click()
+            driver.find_element(BY.id,"c_users_tel_numbers").click()
+            driver.find_element(BY.id,"c_users_tel_numbers").send_keys(oglas.get("stevilka"))
+            driver.find_element(BY.id,"c_users_msg").click()
+            driver.find_element(BY.id,"c_users_msg").send_keys(sporocilo.replace("$CENA",ponujena_cena))
+            driver.find_element(BY.id,"submitButton").click()
             time.sleep(5)
         print("=> Pošiljam sms na tel številko: "+oglas.get("stevilka"))
         
