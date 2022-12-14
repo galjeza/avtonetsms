@@ -142,7 +142,7 @@ def sendSMS(oglasi,sporocilo,procent,driver):
             driver.find_element(By.ID,"c_users_msg").click()
             driver.find_element(By.ID,"c_users_msg").send_keys(sporocilo.replace("$CENA",ponujena_cena))
             driver.find_element(By.ID,"submitButton").click()
-            time.sleep(5)
+            time.sleep(3)
         print("=> Pošiljam sms na tel številko: "+oglas.get("stevilka"))
         
         
